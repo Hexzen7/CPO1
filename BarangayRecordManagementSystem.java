@@ -66,6 +66,7 @@ public class BarangayRecordManagementSystem {
         userRoles[0] = "Administrator";
     }
 
+    // Starts the application, handles account access, and opens the main menu.
     public static void main(String[] args) {
         System.out.println("==================================");
         System.out.println(" BARANGAY RECORD MANAGEMENT SYSTEM");
@@ -80,6 +81,7 @@ public class BarangayRecordManagementSystem {
         System.out.println("Program ended.");
     }
 
+    // Provides login, sign-up, and exit options, allowing up to three login attempts.
     public static boolean login() {
         while (true) {
             System.out.println("\n========== ACCOUNT ACCESS ==========");
@@ -118,6 +120,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Registers a new Barangay Staff account after validating its credentials.
     public static void signUp() {
         System.out.println("\n------ CREATE ACCOUNT ------");
         if (userCount >= MAX_USERS) {
@@ -151,6 +154,7 @@ public class BarangayRecordManagementSystem {
         System.out.println("Barangay Staff account created. You can now log in.");
     }
 
+    // Returns the index of the account matching the supplied username and password.
     public static int findUser(String username, String password) {
         for (int i = 0; i < userCount; i++) {
             if (usernames[i].equalsIgnoreCase(username) && passwords[i].equals(password)) {
@@ -160,6 +164,7 @@ public class BarangayRecordManagementSystem {
         return -1;
     }
 
+    // Checks whether a username is already assigned to an account.
     public static boolean usernameExists(String username) {
         for (int i = 0; i < userCount; i++) {
             if (usernames[i].equalsIgnoreCase(username)) {
@@ -169,6 +174,7 @@ public class BarangayRecordManagementSystem {
         return false;
     }
 
+    // Displays the main menu and routes users to features allowed by their roles.
     public static void showMenu() {
         while (true) {
             System.out.println("\n========== MAIN MENU ==========");
@@ -237,7 +243,7 @@ public class BarangayRecordManagementSystem {
                         System.out.println("Login cancelled or failed. Exiting system.");
                         return;
                     }
-                case 8:2
+                case 8:
                     System.out.println("Exiting the system...");
                     return;
                 default:
@@ -246,6 +252,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Checks whether the signed-in user's role is among the permitted roles.
     public static boolean hasRole(String... allowedRoles) {
         for (String role : allowedRoles) {
             if (userRoles[currentUserIndex].equals(role)) {
@@ -255,10 +262,12 @@ public class BarangayRecordManagementSystem {
         return false;
     }
 
+    // Displays a message when the signed-in role cannot access a feature.
     public static void showAccessDenied() {
         System.out.println("Access denied. Your account role cannot use this feature.");
     }
 
+    // Provides the menu for adding, viewing, searching, updating, and deleting residents.
     public static void residentMenu() {
         while (true) {
             System.out.println("\n------ RESIDENT MANAGEMENT ------");
@@ -293,6 +302,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Provides the menu for creating households, adding members, and viewing records.
     public static void householdMenu() {
         while (true) {
             System.out.println("\n------ HOUSEHOLD MANAGEMENT ------");
@@ -319,6 +329,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Provides options for filing, viewing, and processing certificate requests.
     public static void certificateMenu() {
         while (true) {
             System.out.println("\n------ CERTIFICATE REQUESTS ------");
@@ -345,6 +356,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Provides options for recording incidents, viewing them, and updating their status.
     public static void blotterMenu() {
         while (true) {
             System.out.println("\n------ BLOTTER MANAGEMENT ------");
@@ -371,6 +383,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Provides options for creating accounts, changing roles, and viewing users.
     public static void userMenu() {
         while (true) {
             System.out.println("\n------ USER MANAGEMENT ------");
@@ -397,6 +410,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Collects and stores a new resident record in an available slot.
     public static void addResident() {
         if (residentCount >= MAX_RESIDENTS) {
             System.out.println("The resident list is full.");
@@ -429,6 +443,7 @@ public class BarangayRecordManagementSystem {
         System.out.println("Resident added successfully. Resident ID: " + residentId[index]);
     }
 
+    // Prints all currently active resident records.
     public static void viewResidents() {
         System.out.println("\n------ RESIDENT RECORDS ------");
 
@@ -445,6 +460,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Finds a resident by ID and displays their profile.
     public static void searchResident() {
         System.out.println("\n------ SEARCH RESIDENT ------");
         int id = readInt("Enter resident ID: ");
@@ -457,6 +473,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Updates the entered fields of an existing resident record.
     public static void updateResident() {
         System.out.println("\n------ UPDATE RESIDENT ------");
         int id = readInt("Enter resident ID to update: ");
@@ -534,6 +551,7 @@ public class BarangayRecordManagementSystem {
         System.out.println("Resident record updated successfully.");
     }
 
+    // Confirms and deactivates the selected resident record.
     public static void deleteResident() {
         System.out.println("\n------ DELETE RESIDENT ------");
         int id = readInt("Enter resident ID to delete: ");
@@ -558,6 +576,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Displays the details of the resident stored at the specified array index.
     public static void printResident(int index) {
         System.out.println("------------------------------");
         System.out.println("Resident ID: " + residentId[index]);
@@ -575,6 +594,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Returns the active resident's array index for an ID, or -1 if not found.
     public static int findResidentById(int id) {
         for (int i = 0; i < MAX_RESIDENTS; i++) {
             if (active[i] && residentId[i] == id) {
@@ -584,6 +604,7 @@ public class BarangayRecordManagementSystem {
         return -1;
     }
 
+    // Returns the first inactive resident slot, or -1 if none is available.
     public static int findFreeIndex() {
         for (int i = 0; i < MAX_RESIDENTS; i++) {
             if (!active[i]) {
@@ -593,6 +614,7 @@ public class BarangayRecordManagementSystem {
         return -1;
     }
 
+    // Repeatedly prompts until the user enters a valid whole number.
     public static int readInt(String message) {
         while (true) {
             System.out.print(message);
@@ -606,6 +628,7 @@ public class BarangayRecordManagementSystem {
         }
     }
 
+    // Reads a valid date that is not in the future.
     public static LocalDate readDate(String message) {
             while (true) {
                 System.out.print(message);
@@ -622,6 +645,7 @@ public class BarangayRecordManagementSystem {
             }
         }
 
+    // Reads a yes/no response and returns true for Y or false for N.
     public static boolean readYesNo(String message) {
             while (true) {
                 System.out.print(message);
@@ -635,6 +659,7 @@ public class BarangayRecordManagementSystem {
             }
         }
 
+        // Reads and returns one of the supported gender values.
         public static String readGender() {
             while (true) {
                 System.out.print("Enter gender (Male/Female/Other): ");
@@ -650,10 +675,12 @@ public class BarangayRecordManagementSystem {
             }
         }
 
+    // Calculates a resident's age in years from their recorded birth date.
     public static int calculateAge(int residentIndex) {
             return java.time.Period.between(residentBirthDate[residentIndex], LocalDate.now()).getYears();
         }
 
+    // Creates a household with an eligible resident as its head.
     public static void addHousehold() {
             if (householdCount >= MAX_HOUSEHOLDS) {
                 System.out.println("Household storage is full.");
@@ -685,6 +712,7 @@ public class BarangayRecordManagementSystem {
             System.out.println("Household created. Household ID: " + householdId[index]);
         }
 
+    // Assigns an eligible resident to an existing household.
     public static void addHouseholdMember() {
             int id = readInt("Enter household ID: ");
             int householdIndex = findHouseholdIndex(id);
@@ -706,6 +734,7 @@ public class BarangayRecordManagementSystem {
             System.out.println("Resident added to household.");
         }
 
+    // Displays active households, their heads, and their assigned residents.
     public static void viewHouseholds() {
             if (householdCount == 0) {
                 System.out.println("No household records found.");
@@ -728,6 +757,7 @@ public class BarangayRecordManagementSystem {
             }
         }
 
+    // Returns the first inactive household slot, or -1 if none is available.
     public static int findInactiveHouseholdIndex() {
             for (int i = 0; i < MAX_HOUSEHOLDS; i++) {
                 if (!householdActive[i]) {
@@ -737,6 +767,7 @@ public class BarangayRecordManagementSystem {
             return -1;
         }
 
+    // Returns the active household's array index for an ID, or -1 if not found.
     public static int findHouseholdIndex(int id) {
             for (int i = 0; i < MAX_HOUSEHOLDS; i++) {
                 if (householdActive[i] && householdId[i] == id) {
@@ -746,6 +777,7 @@ public class BarangayRecordManagementSystem {
             return -1;
         }
 
+    // Records a new certificate request for an existing resident.
     public static void addCertificateRequest() {
             if (requestCount >= MAX_REQUESTS) {
                 System.out.println("Certificate request storage is full.");
@@ -781,6 +813,7 @@ public class BarangayRecordManagementSystem {
             System.out.println("Request filed. Request ID: " + requestId[index] + ". Status: Pending.");
         }
 
+    // Displays all active certificate requests and their current statuses.
     public static void viewCertificateRequests() {
             if (requestCount == 0) {
                 System.out.println("No certificate requests found.");
@@ -795,6 +828,7 @@ public class BarangayRecordManagementSystem {
             }
         }
 
+    // Marks a pending request as processed and displays the certificate details.
     public static void processCertificateRequest() {
             int id = readInt("Enter request ID to process: ");
             int index = findRequestIndex(id);
@@ -831,6 +865,7 @@ public class BarangayRecordManagementSystem {
             System.out.println("Certificate displayed for printing.");
         }
 
+    // Returns the first inactive request slot, or -1 if none is available.
     public static int findInactiveRequestIndex() {
             for (int i = 0; i < MAX_REQUESTS; i++) {
                 if (!requestActive[i]) {
@@ -840,6 +875,7 @@ public class BarangayRecordManagementSystem {
             return -1;
         }
 
+    // Returns the active request's array index for an ID, or -1 if not found.
     public static int findRequestIndex(int id) {
             for (int i = 0; i < MAX_REQUESTS; i++) {
                 if (requestActive[i] && requestId[i] == id) {
@@ -849,6 +885,7 @@ public class BarangayRecordManagementSystem {
             return -1;
         }
 
+    // Records a new blotter incident with an initial open status.
     public static void addIncident() {
             if (incidentCount >= MAX_INCIDENTS) {
                 System.out.println("Blotter storage is full.");
@@ -870,6 +907,7 @@ public class BarangayRecordManagementSystem {
             System.out.println("Incident recorded. Blotter ID: " + incidentId[index]);
         }
 
+    // Displays the details and statuses of all active incidents.
     public static void viewIncidents() {
             if (incidentCount == 0) {
                 System.out.println("No incidents recorded.");
@@ -886,6 +924,7 @@ public class BarangayRecordManagementSystem {
             }
         }
 
+    // Changes an incident's status to open or resolved.
     public static void updateIncidentStatus() {
             int id = readInt("Enter blotter ID: ");
             int index = findIncidentIndex(id);
@@ -907,6 +946,7 @@ public class BarangayRecordManagementSystem {
             System.out.println("Incident status updated.");
         }
 
+    // Returns the first inactive incident slot, or -1 if none is available.
     public static int findInactiveIncidentIndex() {
             for (int i = 0; i < MAX_INCIDENTS; i++) {
                 if (!incidentActive[i]) {
@@ -916,6 +956,7 @@ public class BarangayRecordManagementSystem {
             return -1;
         }
 
+    // Returns the active incident's array index for an ID, or -1 if not found.
     public static int findIncidentIndex(int id) {
             for (int i = 0; i < MAX_INCIDENTS; i++) {
                 if (incidentActive[i] && incidentId[i] == id) {
@@ -925,6 +966,7 @@ public class BarangayRecordManagementSystem {
             return -1;
         }
 
+    // Creates an account and assigns one of the supported user roles.
     public static void createManagedUser() {
             if (userCount >= MAX_USERS) {
                 System.out.println("User storage is full.");
@@ -958,6 +1000,7 @@ public class BarangayRecordManagementSystem {
             System.out.println("User account created.");
         }
 
+    // Changes another user's role after validating the account and selection.
     public static void changeUserRole() {
             System.out.print("Enter username: ");
             String username = input.nextLine().trim();
@@ -983,12 +1026,14 @@ public class BarangayRecordManagementSystem {
             System.out.println("User role updated.");
         }
 
+    // Lists all registered usernames and their assigned roles.
     public static void viewUsers() {
             for (int i = 0; i < userCount; i++) {
                 System.out.println(usernames[i] + " - " + userRoles[i]);
             }
         }
 
+    // Returns the account index matching a username, or -1 if not found.
     public static int findUsernameIndex(String username) {
             for (int i = 0; i < userCount; i++) {
                 if (usernames[i].equalsIgnoreCase(username)) {
@@ -998,6 +1043,7 @@ public class BarangayRecordManagementSystem {
             return -1;
         }
 
+    // Calculates and displays resident demographics and current-month request totals.
     public static void showReports() {
             int maleCount = 0;
             int femaleCount = 0;
@@ -1043,6 +1089,7 @@ public class BarangayRecordManagementSystem {
             System.out.println("Certificate requests this month: " + currentMonthRequests);
         }
 
+    // Prompts until the user enters non-empty text, then returns the trimmed value.
     public static String readRequiredText(String message) {
         System.out.print(message);
         String value = input.nextLine().trim();
